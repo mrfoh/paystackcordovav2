@@ -1,0 +1,22 @@
+{
+  "name": "paystackcordovav2",
+  "version": "1.0.0",
+  "description": "Paystack Payments to your cordova application using Paystack Android SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrfoh/paystackcordovav2.git"
+  },
+  "keywords": [
+    "paystack"
+  ],
+  "author": "Patrick Foh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrfoh/paystackcordovav2/issues"
+  },
+  "homepage": "https://github.com/mrfoh/paystackcordovav2#readme"
+}
