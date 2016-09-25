@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.mrfoh.paystackcordova.v2" version="2.0.0">
+    <name>PaystackCordovaV2</name>
+    <description>This plugin allows to add Paystack Payments to your android cordova application using the Paystack Mobile SDK for android</description>
+    <keywords>paystack, sdk, payments</keywords>
+    <license>MIT, see LICENSE.md for details</license>
+    <engines>
+        <engine name="cordova" version=">=5.0.0" />
+    </engines>
+
+    <js-module src="www/paystack.js" name="Paystack">
+        <clobbers target="window.plugins.paystack" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <preference name="PUBLIC_KEY" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PaystackCordova">
+                <param name="android-package" value="com.mrfoh.paystackcordovav2.Paystack" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <meta-data android:name="co.paystack.android.PublicKey" android:value="$PUBLIC_KEY"/>
+        </config-file>
+
+        <source-file src="src/android/Paystack.java" target-dir="src/com/mrfoh/paystackcordovav2/paystack" />
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+
+    </platform>
+
+</plugin>
