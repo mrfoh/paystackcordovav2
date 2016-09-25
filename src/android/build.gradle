@@ -1,0 +1,11 @@
+repositories {
+    maven {
+        url 'https://dl.bintray.com/paystack/maven/'
+    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+dependencies {
+    compile 'co.paystack.android:paystack:2.0.1'
+}
