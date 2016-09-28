@@ -29,7 +29,7 @@ public class PaystackCordova extends CordovaPlugin {
     private  Charge charge;
     private Transaction transaction;
 
-    public static TAG = "com.mrfoh.paystackcordovav2";
+    public static final String TAG = "com.mrfoh.paystackcordovav2";
 
     protected CallbackContext context;
 
@@ -97,7 +97,7 @@ public class PaystackCordova extends CordovaPlugin {
      * @param arg_object JSON object of arguments
      * @throws JSONExecption
      */
-    private void chargeCard(JSONObject arg_object) throws JSONExecption {
+    private void chargeCard(JSONObject arg_object) throws JSONException {
         validateCustomerTransaction(arg_object);
 
         if (card != null && card.isValid()) {
@@ -113,7 +113,7 @@ public class PaystackCordova extends CordovaPlugin {
      * @param arg_object JSON object of arguments
      * @throws JSONExecption
      */
-    private void getToken(JSONObject arg_object) throws JSONExecption {
+    private void getToken(JSONObject arg_object) throws JSONException {
         //validate card
         validateCustomerCard(arg_object);
 
@@ -164,7 +164,7 @@ public class PaystackCordova extends CordovaPlugin {
     private void onChargeSuccess(String ref) {
         try {
             //Log to console using plugin tag
-            Log.i(TAG, reference);
+            Log.i(TAG, ref);
             //create success object
             JSONObject success = new JSONObject();
             success.put("reference", ref);
@@ -210,9 +210,9 @@ public class PaystackCordova extends CordovaPlugin {
      * @param arg_object JSON object of arguments
      * @throws JSONExecption
      */
-    private void validateCustomerTransaction(JSONObject arg_object) throws JSONExecption {
+    private void validateCustomerTransaction(JSONObject arg_object) throws JSONException {
         //validate card
-        validateCustomerCard(args);
+        validateCustomerCard(arg_object);
 
         String email = arg_object.getString("email");
         Integer amount = arg_object.getInt("amount");
@@ -247,7 +247,7 @@ public class PaystackCordova extends CordovaPlugin {
      * @param arg_object JSON object of arguments
      * @throws JSONExecption
      */
-    private void validateCustomerCard(JSONObject arg_object) throws JSONExecption {
+    private void validateCustomerCard(JSONObject arg_object) throws JSONException {
         String cardNum = arg_object.getString("card_number");
         Integer expiryMonth = arg_object.getInt("expiry_month");
         Integer expiryYear = arg_object.getInt("expiry_year");
