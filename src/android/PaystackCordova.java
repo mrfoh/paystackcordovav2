@@ -68,14 +68,14 @@ public class PaystackCordova extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         try {
-            if(action.equals('chargeCard')) {
+            if("chargeCard".equals(action)) {
                 JSONObject arg_object = args.getJSONObject(0);
                 context = callbackContext;
 
                 chargeCard(arg_object);
                 return true;
             }
-            else if(action.equals('getToken')) {
+            else if("getToken".equals(action)) {
                 JSONObject arg_object = args.getJSONObject(0);
                 context = callbackContext;
 
@@ -214,8 +214,8 @@ public class PaystackCordova extends CordovaPlugin {
         //validate card
         validateCustomerCard(args);
 
-        String email = arg_object.getString('email');
-        Integer amount = arg_object.getInt('amount');
+        String email = arg_object.getString("email");
+        Integer amount = arg_object.getInt("amount");
 
         //create charge object
         charge = new Charge();
@@ -248,10 +248,10 @@ public class PaystackCordova extends CordovaPlugin {
      * @throws JSONExecption
      */
     private void validateCustomerCard(JSONObject arg_object) throws JSONExecption {
-        String cardNum = arg_object.getString('card_number');
-        Integer expiryMonth = arg_object.getInt('expiry_month');
-        Integer expiryYear = arg_object.getInt('expiry_year');
-        String cvc = arg_object.getString('cvc');
+        String cardNum = arg_object.getString("card_number");
+        Integer expiryMonth = arg_object.getInt("expiry_month");
+        Integer expiryYear = arg_object.getInt("expiry_year");
+        String cvc = arg_object.getString("cvc");
 
         if(isEmpty(cardNum)) {
             handleError("Invalid card number provided.", 1);
