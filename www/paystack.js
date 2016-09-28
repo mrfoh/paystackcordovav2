@@ -7,7 +7,7 @@ function Paystack() {}
 
 Paystack.prototype.getToken = function(options, successCallback, errorCallback) {
     cordova.
-    execute(
+    exec(
         successCallback,
         errorCallback,
         "PaystackCordovaV2",
@@ -23,7 +23,7 @@ Paystack.prototype.getToken = function(options, successCallback, errorCallback) 
 
 Paystack.prototype.chargeCard = function(options, successCallback, errorCallback) {
     cordova.
-    execute(
+    exec(
         successCallback,
         errorCallback,
         "PaystackCordovaV2",
