@@ -10,7 +10,7 @@
     </engines>
 
     <js-module src="www/paystack.js" name="Paystack">
-        <clobbers target="window.plugins.paystack" />
+        <clobbers target="window.plugins.paystackCordova" />
     </js-module>
 
     <!-- android -->
@@ -19,7 +19,7 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="PaystackCordova">
-                <param name="android-package" value="com.mrfoh.paystackcordovav2.Paystack" />
+                <param name="android-package" value="com.mrfoh.paystackcordovav2.PaystackCordova" />
             </feature>
         </config-file>
 
@@ -27,7 +27,7 @@
             <meta-data android:name="co.paystack.android.PublicKey" android:value="$PUBLIC_KEY"/>
         </config-file>
 
-        <source-file src="src/android/Paystack.java" target-dir="src/com/mrfoh/paystackcordovav2/paystack" />
+        <source-file src="src/android/PaystackCordova.java" target-dir="src/com/mrfoh/paystackcordovav2/paystackcordova" />
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
     </platform>

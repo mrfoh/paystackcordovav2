@@ -13,9 +13,9 @@ Paystack.prototype.getToken = function(options, successCallback, errorCallback) 
         "PaystackCordovaV2",
         "getToken",
         [{
-            "cardNumber": options.cardNumber,
-            "expiryMonth": options.expiryMonth,
-            "expiryYear": options.expiryYear,
+            "card_number": options.cardNumber,
+            "expiry_month": options.expiryMonth,
+            "expiry_year": options.expiryYear,
             "cvc:": options.cvc
         }]
     );
@@ -29,9 +29,9 @@ Paystack.prototype.chargeCard = function(options, successCallback, errorCallback
         "PaystackCordovaV2",
         "chargeCard",
         [{
-            "cardNumber": options.cardNumber,
-            "expiryMonth": options.expiryMonth,
-            "expiryYear": options.expiryYear,
+            "card_umber": options.cardNumber,
+            "expiry_month": options.expiryMonth,
+            "expiry_year": options.expiryYear,
             "cvc": options.cvc,
             "email": options.email,
             "amount": options.amount
