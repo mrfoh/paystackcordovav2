@@ -29,7 +29,7 @@ public class PaystackCordova extends CordovaPlugin {
     private  Charge charge;
     private Transaction transaction;
 
-    public static final TAG = "com.mrfoh.paystackcordovav2";
+    public static TAG = "com.mrfoh.paystackcordovav2";
 
     protected CallbackContext context;
 
@@ -178,7 +178,7 @@ public class PaystackCordova extends CordovaPlugin {
     private void initTransaction() {
         //reset current transaction
         transaction = null;
-        final PaystackCordova plugin = this
+        final PaystackCordova plugin = this;
 
         PaystackSdk.chargeCard(this.cordova.getActivity(), charge, new Paystack.TransactionCallback() {
             @Override
