@@ -25,7 +25,8 @@ The plugin exposes a simple API for generating paystack transaction tokens which
 
 This method creates a unique Paystack token using a card's details; card number, expiry month, year and cvc number.
 
-*Method Arguments*
+Method Arguments
+
 **options**
 
     {
@@ -64,7 +65,8 @@ The error object
 
 This method creates a one-time charge on a card
 
-*Method Arguments*
+Method Arguments
+
 **options**
 
     {
