@@ -30,10 +30,12 @@ Method Arguments
 **options**
 
     {
-	    card_number: "",
-	    expiry_month: "",
-	    expiry_year: "",
-	    cvc: ""
+      card_number: "card number",
+      expiry_month: "expiry month of card",
+      expiry_year: "expiry year of card",
+      cvc: " cvc number of card",
+      email: "customer email",
+      amount: "transaction amount in kobo"
     }
 
 **successCallback**
