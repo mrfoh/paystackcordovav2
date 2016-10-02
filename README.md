@@ -136,8 +136,8 @@ The Paystack android sdk allows you to make a one-time charge on a card.
      	   cvc: 883
      	}
 
-	   	window.plugins.paystackCordova.getToken(options, function(response) {
-	   	  //Make a call to some endpoint to save the response.token and response.last4
-	   	}, function(err) {
-	   	  //perform some error handling
-	   	});
+	window.plugins.paystackCordova.getToken(options, function(response) {
+	  //Make a call to some endpoint to save the response.token and response.last4
+	}, function(err) {
+	  //perform some error handling
+	});
