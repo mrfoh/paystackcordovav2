@@ -30,10 +30,12 @@ Method Arguments
 **options**
 
     {
-	    card_number: "",
-	    expiry_month: "",
-	    expiry_year: "",
-	    cvc: ""
+      card_number: "card number",
+      expiry_month: "expiry month of card",
+      expiry_year: "expiry year of card",
+      cvc: " cvc number of card",
+      email: "customer email",
+      amount: "transaction amount in kobo"
     }
 
 **successCallback**
@@ -57,8 +59,7 @@ Method Arguments
 The error object
 
     {
-	   "code": "Error code; 0 for fatal errors, 1 for validation errors, 2 for paystack errors",
-	   "message": "Error message"
+	   "code": "Error code; 0 for fatal errors, 1 for validation errors, 2 for paystack errors"
     }
 
 
@@ -70,13 +71,14 @@ Method Arguments
 
 **options**
 
-| Property    | Type | Description |
-|-------------|------|-------------|
-|card_number  |      | the card number as a String without any seperator e.g 5555555555554444
-            |
-|expiry_month |      |             |
-|expiry_year  |      |             |
-|cvc          |      |             |
+    {
+	    card_number: "card number",
+	    expiry_month: "expiry month of card",
+	    expiry_year: "expiry year of card",
+	    cvc: " cvc number of card",
+	    email: "customer email",
+	    amount: "transaction amount in kobo"
+    }
 
  **successCallback**
 
@@ -99,26 +101,43 @@ The response object
 The error object
 
     {
-	   "code": "Error code; 0 for fatal errors, 1 for validation errors, 2 for paystack errors",
-	   "message": "Error message"
+	   "code": "Error code; 0 for fatal errors, 1 for validation errors, 2 for paystack errors"
     }
 
 Usage
 ---------
 **Charging a card**
 
-The paystack android sdk allows you to make a one-time charge on a card. Making a one-time charge with this plugin is quite simple;
+The Paystack android sdk allows you to make a one-time charge on a card.
 
     var options = {
-	    card_number: "4123450131001381",
-	    expiry_month: 7,
-	    exipry_year: 2019,
-	    cvc: 883,
-	    email: "john.doe@acme.com",
-	    amount: 50000
-    }
-    window.plugins.paystackCordova.chargeCard(options, function(response) {
-    //Perform verification with response.reference
-    }, function(err) {
-    //Perform error handling
-    });
+       card_number: "4123450131001381",
+       expiry_month: 7,
+       expiry_year: 2019,
+       cvc: 883,
+       email: "john.doe@acme.com",
+       amount: 50000
+     }
+
+     window.plugins.paystackCordova.chargeCard(options, function(response) {
+        //Perform verification with response.reference
+     }, function(err) {
+       //Perform error handling
+     });
+
+ **Create a token**
+
+ The paystack android sdk also allows you to generate a unique token for a customer which can be used to charge them at a later time, most of the time via your server side code.
+
+     var options = {
+     	   card_number: "4123450131001381",
+     	   expiry_month: 7,
+     	   expiry_year: 2019,
+     	   cvc: 883
+     	}
+
+	   	window.plugins.paystackCordova.getToken(options, function(response) {
+	   	  //Make a call to some endpoint to save the response.token and response.last4
+	   	}, function(err) {
+	   	  //perform some error handling
+	   	});
