@@ -11,7 +11,7 @@ From github
 
 From CLI/Plugman
 
-    cordova plugin add paystack-cordova --variable PUBLIC_KEY="your paystack public ket"
+    cordova plugin add paystackcordovav2 --variable PUBLIC_KEY="your paystack public ket"
 
 After installing, you have to build your project so the Paystack SDK can be downloaded. While in your project directory run this;
 
