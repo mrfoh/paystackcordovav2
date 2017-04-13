@@ -75,8 +75,16 @@ Method Arguments
 	    expiry_year: "expiry year of card",
 	    cvc: " cvc number of card",
 	    email: "customer email",
-	    amount: "transaction amount in kobo"
+	    amount: "transaction amount in kobo",
+	    currency: "set a currency for the tranaction (optional)",
+	    reference: "set a custom reference for the transction (optional)",
+	    plan: "set a paystack plan for the transaction if it is intended to create subscription (optional)",
+	    subaccount: "set a subaccount ID for split-payment transactions (optional)",
+	    transaction_charge: "set a transaction charge to be used for split-payment transaction",
+	    bearer: "set bearer for the transaction charge; `subaccount` or `account` (optional)"
     }
+
+NB. Not the bearer field is required if a subaccount is set
 
  **successCallback**
 
