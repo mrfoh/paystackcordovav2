@@ -1,6 +1,6 @@
 {
   "name": "paystackcordovav2",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Paystack Payments to your cordova application using Paystack Android SDK",
   "main": "index.js",
   "scripts": {
