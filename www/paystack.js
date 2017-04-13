@@ -5,7 +5,7 @@
  */
 function Paystack() {}
 
-Paystack.prototype.getToken = function(options, successCallback, errorCallback) {
+Paystack.prototype.getToken = function (options, successCallback, errorCallback) {
     cordova.
     exec(
         successCallback,
@@ -21,7 +21,7 @@ Paystack.prototype.getToken = function(options, successCallback, errorCallback) 
     );
 }
 
-Paystack.prototype.chargeCard = function(options, successCallback, errorCallback) {
+Paystack.prototype.chargeCard = function (options, successCallback, errorCallback) {
     cordova.
     exec(
         successCallback,
@@ -34,7 +34,13 @@ Paystack.prototype.chargeCard = function(options, successCallback, errorCallback
             "expiry_year": options.expiry_year,
             "cvc": options.cvc,
             "email": options.email,
-            "amount": options.amount
+            "amount": options.amount,
+            "currency": option.currency,
+            "reference": options.reference,
+            "plan": options.plan,
+            "subaccount": options.subaccount,
+            "transaction_charge": options.transaction_charge,
+            "bearer": options.bearer
         }]
     );
 }
