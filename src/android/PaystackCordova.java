@@ -216,30 +216,70 @@ public class PaystackCordova extends CordovaPlugin {
 
         String email = arg_object.getString("email");
         Integer amount = arg_object.getInt("amount");
+        String currency = arg_object.getString("currency");
+        String reference = arg_object.getString("reference");
+        String plan = arg_object.getString("plan");
+        String subaccount = arg_object.getString("subaccount");
+        Integer tranaction_charge = arg_object.getInt("transaction_charge");
+        String  bearer = arg_object.getString("bearer");
 
         //create charge object
         charge = new Charge();
         //associate card with charge
         charge.setCard(card);
 
+        if (reference != null && !reference.isEmpty()) {
+            charge.setReference(reference);
+        }
+
         if (isEmpty(email)) {
             handleError("Email cannot be empty.", 1);
-            return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             handleError("Invalid email.", 1);
-            return;
         }
 
         charge.setEmail(email);
 
         if (amount < 1) {
             handleError("Invalid amount.", 1);
-            return;
         }
 
         charge.setAmount(amount);
+
+        if (currency != null && !isEmpty(currency)) {
+            charge.setCurrency(currency);
+        }
+
+        if(plan != null & !isEmpty(plan)) {
+            charge.setPlan(plan);
+        }
+
+        if(subaccount != null && !isEmpty(subaccount)) {
+            charge.setSubaccount(subaccount);
+
+            if(bearer != null && isEmpty(bearer) && bearer.equals("subaccount") || bearer.equals("account")) {
+                switch (bearer) {
+                    case "subaccount":
+                        charge.setBearer(Charge.Bearer.subaccount);
+                        break;
+                    case "account":
+                        charge.setBearer(Charge.Bearer.account);
+                        break;
+                }
+
+                if (tranaction_charge >= 0) {
+                    charge.setTransactionCharge(tranaction_charge);
+                }
+                else {
+                    handleError("Invalid transaction_charge.", 1);
+                }
+            }
+            else {
+                handleError("Invalid bearer.", 1);
+            }
+        }
     }
 
     /**
@@ -262,13 +302,11 @@ public class PaystackCordova extends CordovaPlugin {
         //validate card number
         if (!card.validNumber()) {
             handleError("Invalid card number provided.", 1);
-            return;
         }
 
         //validate expiry month
         if(expiryMonth < 1 || expiryMonth > 12) {
             handleError("Invalid expiry month provided.", 1);
-            return;
         }
         //update the expiryMonth field of the card
         card.setExpiryMonth(expiryMonth);
@@ -276,7 +314,6 @@ public class PaystackCordova extends CordovaPlugin {
         //validate expiry year
         if(expiryYear < 1) {
             handleError("Invalid expiry year provided.", 1);
-            return;
         }
         //update the expiryYear field of the card
         card.setExpiryYear(expiryYear);
@@ -288,7 +325,6 @@ public class PaystackCordova extends CordovaPlugin {
 
         if(isEmpty(cvc)) {
             handleError("Empty cvc code.", 1);
-            return;
         }
 
         //update the cvc field of the card
@@ -297,7 +333,6 @@ public class PaystackCordova extends CordovaPlugin {
         //check that it's valid
         if (!card.validCVC()) {
             handleError("Invalid cvc code provided.", 1);
-            return;
         }
     }
 
