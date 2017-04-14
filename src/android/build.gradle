@@ -1,11 +1,24 @@
-repositories {
-    maven {
-        url 'https://dl.bintray.com/paystack/maven/'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
     }
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
+
+    buildTypes {
+        release {
+            minifyEnabled false  // Set this to true to enable Proguard
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
     }
 }
+
 dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'co.paystack.android:paystack:3.0.1'
 }
