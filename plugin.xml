@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.mrfoh.paystackcordova.v2" version="2.0.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.mrfoh.paystackcordova.v2" version="2.0.2">
     <name>PaystackCordovaV2</name>
     <description>This plugin allows to add Paystack Payments to your android cordova application using the Paystack Mobile SDK for android</description>
     <keywords>paystack, sdk, payments</keywords>
