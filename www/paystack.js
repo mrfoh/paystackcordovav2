@@ -35,7 +35,7 @@ Paystack.prototype.chargeCard = function (options, successCallback, errorCallbac
             "cvc": options.cvc,
             "email": options.email,
             "amount": options.amount,
-            "currency": option.currency,
+            "currency": options.currency,
             "reference": options.reference,
             "plan": options.plan,
             "subaccount": options.subaccount,
