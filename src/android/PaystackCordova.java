@@ -185,12 +185,12 @@ public class PaystackCordova extends CordovaPlugin {
 
         String email = arg_object.getString("email");
         Integer amount = arg_object.getInt("amount");
-        String currency = arg_object.getString("currency");
-        String reference = arg_object.getString("reference");
-        String plan = arg_object.getString("plan");
-        String subaccount = arg_object.getString("subaccount");
-        Integer transaction_charge = arg_object.getInt("transaction_charge");
-        String  bearer = arg_object.getString("bearer");
+        String currency = arg_object.optString("currency", "NGN");
+        String reference = arg_object.optString("reference");
+        String plan = arg_object.optString("plan");
+        String subaccount = arg_object.optString("subaccount");
+        Integer transaction_charge = arg_object.optInt("transaction_charge");
+        String  bearer = arg_object.optString("bearer");
 
         //create charge object
         charge = new Charge();
