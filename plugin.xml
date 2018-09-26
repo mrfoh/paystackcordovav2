@@ -6,7 +6,7 @@
     <keywords>paystack, sdk, payments</keywords>
     <license>MIT, see LICENSE.md for details</license>
     <engines>
-        <engine name="cordova" version=">=5.0.0" />
+        <engine name="cordova" version=">=6.0.0" />
     </engines>
 
     <js-module src="www/paystack.js" name="Paystack">

@@ -5,18 +5,19 @@
  */
 function Paystack() {}
 
-Paystack.prototype.getToken = function (options, successCallback, errorCallback) {
+Paystack.prototype.chargeCardWithAccessCode = function (options, successCallback, errorCallback) {
     cordova.
     exec(
         successCallback,
         errorCallback,
         "PaystackCordova",
-        "getToken",
+        "chargeCardWithAccessCode",
         [{
+            "access_code": options.access_code,
             "card_number": options.card_number,
             "expiry_month": options.expiry_month,
             "expiry_year": options.expiry_year,
-            "cvc": options.cvc
+            "cvc": options.cvc,
         }]
     );
 }
