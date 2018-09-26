@@ -1,6 +1,6 @@
 {
   "name": "paystackcordovav2",
-  "version": "2.0.3",
+  "version": "2.0.2",
   "description": "Paystack Payments to your cordova application using Paystack Android SDK",
   "main": "index.js",
   "scripts": {
@@ -12,12 +12,6 @@
   },
   "keywords": [
     "paystack"
-  ],
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=6.0.0"
-    }
   ],
   "author": "Patrick Foh",
   "license": "ISC",
