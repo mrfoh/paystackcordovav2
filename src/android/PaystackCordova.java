@@ -17,9 +17,8 @@ import android.net.Uri;
 import co.paystack.android.Paystack;
 import co.paystack.android.PaystackSdk;
 import co.paystack.android.model.Card;
-import co.paystack.android.model.Token;
 import co.paystack.android.model.Charge;
-import co.paystack.android.model.Transaction;
+import co.paystack.android.Transaction;
 
 public class PaystackCordova extends CordovaPlugin {
 
