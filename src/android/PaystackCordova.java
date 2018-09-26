@@ -17,20 +17,15 @@ import android.net.Uri;
 import co.paystack.android.Paystack;
 import co.paystack.android.PaystackSdk;
 import co.paystack.android.model.Card;
-import co.paystack.android.model.Token;
 import co.paystack.android.model.Charge;
-import co.paystack.android.model.Transaction;
+import co.paystack.android.Transaction;
 
 public class PaystackCordova extends CordovaPlugin {
 
-    protected Token token;
     protected Card card;
-
-    private  Charge charge;
+    private Charge charge;
     private Transaction transaction;
-
     public static final String TAG = "com.mrfoh.paystackcordovav2";
-
     protected CallbackContext context;
 
     /**
@@ -216,12 +211,12 @@ public class PaystackCordova extends CordovaPlugin {
 
         String email = arg_object.getString("email");
         Integer amount = arg_object.getInt("amount");
-        String currency = arg_object.getString("currency");
-        String reference = arg_object.getString("reference");
-        String plan = arg_object.getString("plan");
-        String subaccount = arg_object.getString("subaccount");
-        Integer tranaction_charge = arg_object.getInt("transaction_charge");
-        String  bearer = arg_object.getString("bearer");
+        String currency = arg_object.optString("currency", "NGN");
+        String reference = arg_object.optString("reference");
+        String plan = arg_object.optString("plan");
+        String subaccount = arg_object.optString("subaccount");
+        Integer transaction_charge = arg_object.optInt("transaction_charge");
+        String  bearer = arg_object.optString("bearer");
 
         //create charge object
         charge = new Charge();
@@ -269,8 +264,8 @@ public class PaystackCordova extends CordovaPlugin {
                         break;
                 }
 
-                if (tranaction_charge >= 0) {
-                    charge.setTransactionCharge(tranaction_charge);
+                if (transaction_charge >= 0) {
+                    charge.setTransactionCharge(transaction_charge);
                 }
                 else {
                     handleError("Invalid transaction_charge.", 1);
