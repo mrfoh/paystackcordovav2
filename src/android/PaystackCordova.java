@@ -124,7 +124,6 @@ public class PaystackCordova extends CordovaPlugin {
         }
     }
 
-
     /**
      * @param ref Paystack transaction reference
      */
