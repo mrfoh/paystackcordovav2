@@ -68,18 +68,16 @@ public class PaystackCordova extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         try {
-            if("chargeCard".equals(action)) {
-                JSONObject arg_object = args.getJSONObject(0);
-                context = callbackContext;
+            JSONObject arg = args.getJSONObject(0);
 
-                chargeCard(arg_object);
+            if("chargeCard".equals(action)) {
+                context = callbackContext;
+                chargeCard(arg);
                 return true;
             }
-            else if("getToken".equals(action)) {
-                JSONObject arg_object = args.getJSONObject(0);
+            else if("chargeCardWithAccessCode".equals(action)) {
                 context = callbackContext;
-
-                getToken(arg_object);
+                chargeWithAccessCode(arg);
                 return true;
             }
             else {
@@ -94,11 +92,11 @@ public class PaystackCordova extends CordovaPlugin {
     }
 
     /**
-     * @param arg_object JSON object of arguments
+     * @param args JSON object of arguments
      * @throws JSONExecption
      */
-    private void chargeCard(JSONObject arg_object) throws JSONException {
-        validateCustomerTransaction(arg_object);
+    private void chargeCard(JSONObject args) throws JSONException {
+        validateCustomerTransaction(args);
 
         if (card != null && card.isValid()) {
             try {
@@ -110,53 +108,27 @@ public class PaystackCordova extends CordovaPlugin {
     }
 
     /**
-     * @param arg_object JSON object of arguments
+     * @param args JSON object of arguments
      * @throws JSONExecption
      */
-    private void getToken(JSONObject arg_object) throws JSONException {
-        //validate card
-        validateCustomerCard(arg_object);
+    private void chargeWithAccessCode(JSONObject args) throws JSONException {
+        String accessCode = args.getString("access_code");
+        // validate card
+        validateCustomerCard(args);
+        // create charge
+        charge = new Charge();
+        charge.setCard(card);
+        charge.setAccessCode(accessCode);
 
         if (card != null && card.isValid()) {
-            createToken();
+            try {
+                initTransaction();
+            } catch(Exception error) {
+                handleError(error.getMessage(), 0);
+            }
         }
     }
 
-    private void createToken() {
-        //then create token using PaystackSdk class
-        PaystackSdk.createToken(card, new Paystack.TokenCallback() {
-            @Override
-            public void onCreate(Token token) {
-                //here you retrieve the token, and send to your server for charging.
-                onCreateTokenSuccess(token.token, token.last4);
-            }
-
-            @Override
-            public void onError(Throwable error) {
-                handleError(error.getMessage(), 2);
-            }
-        });
-    }
-
-    /**
-     *
-     * @param token Paystack card token
-     * @param lastDigits Last 4 digits of customer card
-     */
-    private void onCreateTokenSuccess(String token, String lastDigits) {
-        try {
-            //log to console using plugin tag
-            Log.i(TAG, token);
-            //create success object
-            JSONObject success = new JSONObject();
-            success.put("token", token);
-            success.put("last4", lastDigits);
-            context.success(success);
-
-        } catch (JSONException e) {
-            handleError(e.getMessage(), 0);
-        }
-    }
 
     /**
      * @param ref Paystack transaction reference
@@ -175,6 +147,9 @@ public class PaystackCordova extends CordovaPlugin {
         }
     }
 
+    /**
+     * Initiate a transaction
+     */
     private void initTransaction() {
         //reset current transaction
         transaction = null;
@@ -184,7 +159,7 @@ public class PaystackCordova extends CordovaPlugin {
             @Override
             public void onSuccess(Transaction transaction) {
                 plugin.transaction = transaction;
-                onChargeSuccess(transaction.reference);
+                onChargeSuccess(transaction.getReference());
             }
 
             @Override
@@ -193,15 +168,14 @@ public class PaystackCordova extends CordovaPlugin {
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(Throwable e, Transaction transaction) {
 
                 if (plugin.transaction == null) {
                     handleError(e.getMessage(), 2);
                 } else {
-                    handleError(transaction.reference + " concluded with error: " + e.getMessage(), 2);
+                    handleError(transaction.getReference() + " failed with error: " + e.getMessage(), 2);
                 }
             }
-
         });
     }
 
@@ -220,7 +194,7 @@ public class PaystackCordova extends CordovaPlugin {
         String reference = arg_object.getString("reference");
         String plan = arg_object.getString("plan");
         String subaccount = arg_object.getString("subaccount");
-        Integer tranaction_charge = arg_object.getInt("transaction_charge");
+        Integer transaction_charge = arg_object.getInt("transaction_charge");
         String  bearer = arg_object.getString("bearer");
 
         //create charge object
@@ -270,7 +244,7 @@ public class PaystackCordova extends CordovaPlugin {
                 }
 
                 if (tranaction_charge >= 0) {
-                    charge.setTransactionCharge(tranaction_charge);
+                    charge.setTransactionCharge(transaction_charge);
                 }
                 else {
                     handleError("Invalid transaction_charge.", 1);
@@ -284,14 +258,14 @@ public class PaystackCordova extends CordovaPlugin {
 
     /**
      *
-     * @param arg_object JSON object of arguments
+     * @param args JSON object of arguments
      * @throws JSONExecption
      */
-    private void validateCustomerCard(JSONObject arg_object) throws JSONException {
-        String cardNum = arg_object.getString("card_number");
-        Integer expiryMonth = arg_object.getInt("expiry_month");
-        Integer expiryYear = arg_object.getInt("expiry_year");
-        String cvc = arg_object.getString("cvc");
+    private void validateCustomerCard(JSONObject args) throws JSONException {
+        String cardNum = args.getString("card_number");
+        Integer expiryMonth = args.getInt("expiry_month");
+        Integer expiryYear = args.getInt("expiry_year");
+        String cvc = args.getString("cvc");
 
         if(isEmpty(cardNum)) {
             handleError("Invalid card number provided.", 1);
