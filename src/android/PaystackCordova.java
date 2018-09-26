@@ -242,8 +242,8 @@ public class PaystackCordova extends CordovaPlugin {
                         break;
                 }
 
-                if (tranaction_charge >= 0) {
-                    charge.setTransactionCharge(transaction_charge);
+                if (transaction_charge >= 0) {
+                    charge.setTransactionCharge(transaction_charge;
                 }
                 else {
                     handleError("Invalid transaction_charge.", 1);
