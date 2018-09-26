@@ -22,14 +22,10 @@ import co.paystack.android.Transaction;
 
 public class PaystackCordova extends CordovaPlugin {
 
-    protected Token token;
     protected Card card;
-
-    private  Charge charge;
+    private Charge charge;
     private Transaction transaction;
-
     public static final String TAG = "com.mrfoh.paystackcordovav2";
-
     protected CallbackContext context;
 
     /**
