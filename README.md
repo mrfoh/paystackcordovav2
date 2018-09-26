@@ -21,15 +21,16 @@ API
 -----
 The plugin exposes a simple API for generating paystack transaction tokens which can used to charge a customer without them re-entering their card, as well as making a one-time charge.
 
-**window.plugin.paystackCordova.getToken(options, successCallback, errorCallback)**
+**window.plugin.paystackCordova.chargeCardWithAccessCode(options, successCallback, errorCallback)**
 
-This method creates a unique Paystack token using a card's details; card number, expiry month, year and cvc number.
+This method charges a card using a Paystack `access_token` and a customer's card's details; card number, expiry month, year and cvc number.
 
 Method Arguments
 
 **options**
 
     {
+      access_code: "access code",
       card_number: "card number",
       expiry_month: "expiry month of card",
       expiry_year: "expiry year of card",
@@ -45,8 +46,7 @@ Method Arguments
 
 
     {
-	   "token": "Paystack token",
-	   "last4": "Last 4 digits of the card"
+	   "reference": "Unique paystack transaction reference"
     }
 
   **errorCallback**
@@ -131,18 +131,19 @@ The Paystack android sdk allows you to make a one-time charge on a card.
        //Perform error handling
      });
 
- **Create a token**
+ **Charing an access code**
 
  The paystack android sdk also allows you to generate a unique token for a customer which can be used to charge them at a later time, most of the time via your server side code.
 
      var options = {
+           access_code: "PK_353ADFA",
      	   card_number: "4123450131001381",
      	   expiry_month: 7,
      	   expiry_year: 2019,
      	   cvc: 883
      	}
 
-	window.plugins.paystackCordova.getToken(options, function(response) {
+	window.plugins.paystackCordova.chargeCardWithAccessCode(options, function(response) {
 	  //Make a call to some endpoint to save the response.token and response.last4
 	}, function(err) {
 	  //perform some error handling
